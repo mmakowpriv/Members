@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Soka.Models;
 
-namespace Soka.Pages.Members
+namespace Soka.Pages.Organizations
 {
     public class IndexModel : PageModel
     {
@@ -18,15 +18,11 @@ namespace Soka.Pages.Members
             _context = context;
         }
 
-        public IList<Member> Member { get;set; }
+        public IList<Organization> Organization { get;set; }
 
         public async Task OnGetAsync()
         {
-            _context.Database.EnsureCreated();
-            //DBInitializer.Initialize(_context);
-            Member = await _context.Member
-                .Include(m => m.Organization)
-                .ToListAsync();
+            Organization = await _context.Organization.ToListAsync();
         }
     }
 }
